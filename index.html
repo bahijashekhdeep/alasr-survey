@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>نموذج تقييم الدورة | معهد العصر</title>
+<meta name="theme-color" content="#01452A">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/survey.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="panel">
+    <div class="panel-mark" id="panelMark" aria-hidden="true"></div>
+    <div class="panel-inner">
+      <div class="plate" id="plate"></div>
+      <div class="course">
+        <p class="eyebrow" id="diploma">&nbsp;</p>
+        <h1 id="courseTitle">جارٍ التحميل…</h1>
+        <p class="meta"><span id="courseNo"></span><span class="dot" aria-hidden="true"></span><span id="dates"></span></p>
+      </div>
+      <div class="trainer-row">
+        <div class="trainer" id="trainer" hidden>
+          <div class="trainer-photo" id="trainerPhoto"></div>
+          <div>
+            <span class="trainer-label">المدرب</span>
+            <strong id="trainerName"></strong>
+            <span class="trainer-title" id="trainerTitle"></span>
+          </div>
+        </div>
+        <div class="growth" id="growth" aria-hidden="true">
+          <div id="growthSvg"></div>
+          <div class="growth-label"><span id="progLabel">البداية</span><span id="progCount"></span></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="stage" id="stage" aria-live="polite"></main>
+</div>
+
+<script src="config.js"></script>
+<script src="common.js"></script>
+<script src="assets/survey.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+:root {
+  --green: #016D3C;
+  --green-deep: #01452A;
+  --green-ink: #0B3B26;
+  --green-soft: #5FA77A;
+  --gold: #CAA22A;
+  --gold-deep: #AE8D4C;
+  --gold-soft: #E9D48F;
+  --cream: #FAF1D1;
+  --paper: #FCF8EC;
+  --sand: #EFE6CC;
+  --ink: #1F2A24;
+  --muted: #6B7268;
+  --line: #E4DABD;
+  --danger: #B5523B;
+  --radius: 18px;
+  --shadow: 0 18px 50px -24px rgba(1, 69, 42, .35);
+  --pattern: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23CAA22A' stroke-width='1'%3E%3Cpath d='M40 6l9.9 24.1L74 40l-24.1 9.9L40 74l-9.9-24.1L6 40l24.1-9.9z'/%3E%3Crect x='22' y='22' width='36' height='36' transform='rotate(45 40 40)'/%3E%3Ccircle cx='40' cy='40' r='6'/%3E%3Cpath d='M0 0l12 12M80 0L68 12M0 80l12-12M80 80L68 68'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Tajawal', 'Noto Sans Arabic', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.6;
+}
+button, input, textarea, select { font: inherit; color: inherit; }
+
+.logo-fallback {
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 800; color: var(--green); letter-spacing: 0;
+}

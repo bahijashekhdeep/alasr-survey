@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>بطاقة دعوة التقييم | معهد العصر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/base.css">
+<style>
+  body { background: #E9E4D3; min-height: 100vh; }
+  .bar { position: sticky; top: 0; z-index: 5; background: var(--green-deep); color: #fff; }
+  .bar-in { max-width: 900px; margin: 0 auto; padding: 10px 16px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .bar-in strong { margin-inline-end: auto; }
+  .seg { display: inline-flex; border: 1px solid rgba(233,212,143,.5); border-radius: 999px; overflow: hidden; }
+  .seg button { border: 0; background: transparent; color: #fff; padding: 7px 14px; cursor: pointer; font-weight: 700; }
+  .seg button.on { background: var(--gold); color: var(--green-ink); }
+  .dl { border: 0; cursor: pointer; border-radius: 999px; padding: 9px 18px; font-weight: 800; color: var(--green-ink); background: linear-gradient(180deg, #E2BF4E, var(--gold)); }
+  .stage { padding: 24px 16px 48px; display: flex; justify-content: center; }
+  .scaler { transform-origin: top center; }
+
+  .card {
+    width: 1080px; height: 1350px; position: relative; overflow: hidden; isolation: isolate; color: #fff; text-align: center;
+    background: radial-gradient(120% 75% at 50% 0%, #02804A 0%, var(--green) 40%, var(--green-deep) 100%);
+    display: flex; flex-direction: column; align-items: center; padding: 80px 90px 60px;
+  }
+  .card.story { height: 1920px; padding-top: 200px; padding-bottom: 160px; }
+  .pat { position: absolute; inset: 0; z-index: -1; background-image: var(--pattern); background-size: 120px; opacity: .12; }
+  .glow { position: absolute; z-index: -1; width: 1000px; height: 1000px; border-radius: 50%; left: 50%; top: -520px; transform: translateX(-50%); background: radial-gradient(circle, rgba(202,162,42,.3), transparent 65%); }
+  .card > * { flex: none; }
+  .c-logo { width: 170px; height: 170px; border-radius: 50%; background: var(--cream); display: grid; place-items: center; box-shadow: 0 0 0 8px rgba(202,162,42,.6), 0 0 0 20px rgba(202,162,42,.14); }
+  .c-logo .logo { width: 80%; height: 80%; object-fit: contain; font-size: 44px; }
+  .c-kicker { margin-top: 44px; padding: 8px 30px; border: 2px solid rgba(233,212,143,.55); border-radius: 999px; font-size: 30px; color: var(--cream); }
+  .c-title { margin: 28px 0 10px; font-size: 68px; line-height: 1.3; font-weight: 900; }
+  .c-trainer { font-size: 36px; color: var(--gold-soft); font-weight: 700; margin-bottom: 56px; }
+  .c-qr { margin-top: auto; background: var(--cream); padding: 30px; border-radius: 36px; box-shadow: 0 0 0 6px rgba(202,162,42,.7), 0 40px 80px -30px rgba(0,0,0,.6); }
+  .c-qr svg { width: 300px; height: 300px; display: block; }
+  .c-qr svg path, .c-qr svg rect[fill="black"] { fill: #0B3B26; }
+  .c-cta { margin-top: 40px; font-size: 34px; font-weight: 700; }
+  .c-link { margin-top: 14px; font-size: 36px; font-weight: 800; color: var(--gold-soft); letter-spacing: .5px; }
+  .c-foot { margin-top: 40px; font-size: 24px; color: rgba(255,255,255,.7); }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="bar-in">
+    <strong>بطاقة دعوة التقييم</strong>
+    <div class="seg" role="group" aria-label="المقاس">
+      <button type="button" class="on" data-f="post">منشور ٤:٥</button>
+      <button type="button" data-f="story">ستوري ٩:١٦</button>
+    </div>
+    <button class="dl" id="dl" type="button">تنزيل الصورة</button>
+  </div>
+</div>
+<div class="stage"><div class="scaler" id="scaler">
+  <div class="card" id="card">
+    <div class="pat"></div><div class="glow"></div>
+    <div class="c-logo" id="cLogo"></div>
+    <div class="c-kicker" id="cKicker">قيّم الدورة</div>
+    <div class="c-title" id="cTitle"></div>
+    <div class="c-trainer" id="cTrainer"></div>
+    <div class="c-qr" id="cQr"></div>
+    <div class="c-cta">امسح الرمز أو افتح الرابط لتقييم الدورة</div>
+    <div class="c-link" dir="ltr" id="cLink"></div>
+    <div class="c-foot" id="cFoot"></div>
+  </div>
+</div></div>
+
+<script src="config.js"></script>
+<script src="common.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script>
+(async function () {
+  const cfg = window.ALASR_CONFIG, A = window.ALASR, $ = id => document.getElementById(id);
+  let course = cfg.DEMO_COURSES.find(c => c.active) || cfg.DEMO_COURSES[0];
+  if (cfg.API_URL) {
+    try { const r = await fetch(cfg.API_URL + '?action=active'); const d = await r.json(); if (d.course) course = d.course; } catch (e) {}
+  }
+  $('cLogo').innerHTML = A.logoImg('logo');
+  $('cKicker').textContent = 'تقييم الدورة ' + (A.ORDINALS[course.number] || course.number || '');
+  $('cTitle').textContent = course.title;
+  $('cTrainer').textContent = course.trainer;
+  $('cLink').textContent = cfg.SITE_URL.replace(/^https?:\/\//, '');
+  $('cFoot').textContent = cfg.INSTITUTE;
+  const q = qrcode(0, 'M'); q.addData(cfg.SITE_URL); q.make();
+  $('cQr').innerHTML = q.createSvgTag({ cellSize: 8, margin: 0, scalable: true });
+
+  const card = $('card'), scaler = $('scaler');
+  function fit() {
+    const w = Math.min(window.innerWidth - 32, 720);
+    const s = w / 1080;
+    scaler.style.transform = `scale(${s})`;
+    scaler.style.height = (card.offsetHeight * s) + 'px';
+    scaler.parentElement.style.height = (card.offsetHeight * s + 72) + 'px';
+  }
+  window.addEventListener('resize', fit); fit();
+
+  document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.seg button').forEach(x => x.classList.toggle('on', x === b));
+    card.classList.toggle('story', b.dataset.f === 'story');
+    fit();
+  }));
+
+  $('dl').addEventListener('click', async () => {
+    const prev = scaler.style.transform;
+    scaler.style.transform = 'none';
+    try {
+      await document.fonts.ready;
+      const canvas = await html2canvas(card, { scale: 1, backgroundColor: null, useCORS: true });
+      const a = document.createElement('a');
+      a.download = `دعوة-تقييم-${course.trainer}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    } finally { scaler.style.transform = prev; }
+  });
+})();
+</script>
+</body>
+</html>
