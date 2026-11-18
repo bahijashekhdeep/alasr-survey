@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/base.css">
+<link rel="stylesheet" href="assets/base.css?v=2">
 <style>
   body { background: #E9E4D3; min-height: 100vh; }
   .bar { position: sticky; top: 0; z-index: 5; background: var(--green-deep); color: #fff; }
@@ -62,14 +62,13 @@
     <div class="c-title" id="cTitle"></div>
     <div class="c-trainer" id="cTrainer"></div>
     <div class="c-qr" id="cQr"></div>
-    <div class="c-cta">امسح الرمز أو افتح الرابط لتقييم الدورة</div>
-    <div class="c-link" dir="ltr" id="cLink"></div>
+    <div class="c-cta">امسح الرمز لتقييم الدورة</div>
     <div class="c-foot" id="cFoot"></div>
   </div>
 </div></div>
 
-<script src="config.js"></script>
-<script src="common.js"></script>
+<script src="config.js?v=2"></script>
+<script src="common.js?v=2"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
@@ -83,7 +82,6 @@
   $('cKicker').textContent = 'تقييم الدورة ' + (A.ORDINALS[course.number] || course.number || '');
   $('cTitle').textContent = course.title;
   $('cTrainer').textContent = course.trainer;
-  $('cLink').textContent = cfg.SITE_URL.replace(/^https?:\/\//, '');
   $('cFoot').textContent = cfg.INSTITUTE;
   const q = qrcode(0, 'M'); q.addData(cfg.SITE_URL); q.make();
   $('cQr').innerHTML = q.createSvgTag({ cellSize: 8, margin: 0, scalable: true });

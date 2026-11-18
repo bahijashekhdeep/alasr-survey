@@ -71,7 +71,7 @@
       <div class="cv-swoosh">${swoosh()}</div>
       <div class="cv-foot">
         <div><span>تاريخ التقرير</span><b>${today()}</b>${prep}</div>
-        <div class="cv-qr-wrap"><div><span>رابط التقييم</span><b dir="ltr">${esc(cfg.SITE_URL.replace(/^https?:\/\//, ''))}</b></div><div class="cv-qr">${qrSvg(cfg.SITE_URL)}</div></div>
+        <div class="cv-qr-wrap"><div><span>رابط التقييم</span><b><a class="cv-link" href="${esc(cfg.SITE_URL)}">افتح التقييم ←</a></b></div><div class="cv-qr">${qrSvg(cfg.SITE_URL)}</div></div>
       </div>
     </div>`, 'cover-page');
   }
