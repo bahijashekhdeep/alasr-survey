@@ -4,7 +4,7 @@ window.ALASR_CONFIG = {
   API_URL: 'https://script.google.com/macros/s/AKfycbzzffbIMxRh17LZdATW9wXCBZUcPb_T5blhCP_TWIUbkU0xJRX54hpm_nY_tsiV6qV8/exec',
 
   // رابط الموقع بعد رفعه على Netlify (يُستخدم في رمز QR وبطاقة الدعوة والتقرير)
-  SITE_URL: 'https://alasr-survey.netlify.app',
+  SITE_URL: 'https://bahijashekhdeep.github.io/alasr-survey',
 
   INSTITUTE: 'معهد العصر للاقتصاد الإسلامي والتدريب',
   INSTITUTE_SHORT: 'معهد العصر',
