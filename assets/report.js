@@ -159,27 +159,8 @@
     return html ? `<div class="sec">${secHead(no, 'صوت المشاركين', 'ما كتبه المشاركون بكلماتهم، مجمّعاً حسب الموضوع، والجمل المتكررة تظهر مرة واحدة مع عددها.')}${html}</div>` : '';
   }
 
-  const ADVICE = {
-    q1: 'تزويد المدرب بخطة الدورة ومحاورها مبكراً، وتنسيق المحتوى مع إدارة الدبلوم.',
-    q2: 'تثبيت مواعيد البدء والانتهاء وإرسال تذكير قبل كل جلسة.',
-    q3: 'تخصيص وقت ثابت للأسئلة في نهاية كل محور.',
-    q4: 'إدخال أنشطة تفاعلية قصيرة: أسئلة مباشرة، ونقاش في مجموعات، واستطلاعات سريعة.',
-    q5: 'مراجعة محاور الدورة مع المدرب لضمان تغطية الموضوع كاملاً.',
-    q6: 'تنويع وسائل العرض بين الشرائح والأمثلة والحالات العملية.',
-    q7: 'ربط المفاهيم بأمثلة من واقع المصارف والمؤسسات المالية الإسلامية.',
-    q8: 'تقسيم الجلسات إلى مقاطع أقصر مع فواصل وأنشطة تجدد الانتباه.',
-    q9: 'وضع جدول زمني لكل محور ومتابعته أثناء الجلسة.',
-    q10: 'زيادة التطبيقات العملية ودراسات الحالة المرتبطة بمجال عمل المشاركين.',
-    q11: 'إضافة ملخصات ومراجع للتوسع بعد الدورة.'
-  };
-  function stepsSection(st, no) {
-    const weak = st.items.filter(i => i.p < 90).sort((a, b) => a.p - b.p).slice(0, 4);
-    const list = (weak.length ? weak : st.low.slice(0, 2))
-      .map(i => `<li><div><strong>${esc(i.text)}</strong><p>${esc(ADVICE[i.id])}</p></div><span class="sp">${A.fmt(i.p)}</span></li>`).join('');
-    return `<div class="sec">${secHead(no, 'خطوات التطوير', 'مقترحات عملية تبدأ من البنود الأقل تقييماً.')}
-      <ol class="steps-list">${list}</ol>
-      <div class="closing"><div><p>شكراً للمشاركين على وقتهم وصدق آرائهم، ونسأل الله أن ينفع بهذا الدبلوم.</p><span>${esc(cfg.INSTITUTE)}</span></div><div class="cl-sw">${swoosh()}</div></div>
-    </div>`;
+  function closing() {
+    return `<div class="closing"><div><p>شكراً للمشاركين على وقتهم وصدق آرائهم، ونسأل الله أن ينفع بهذا الدبلوم.</p><span>${esc(cfg.INSTITUTE)}</span></div><div class="cl-sw">${swoosh()}</div></div>`;
   }
 
   function appendix(st, no) {
@@ -187,7 +168,7 @@
     return `<div class="sec">${secHead(no, 'ملحق: الأعداد التفصيلية', 'عدد الإجابات لكل تقدير. النسبة = مجموع النقاط (ممتاز 4، جيد جداً 3، جيد 2، ضعيف 1) ÷ أعلى مجموع ممكن.')}
       <table class="tbl"><thead><tr><th class="t">البند</th><th>ممتاز</th><th>جيد جداً</th><th>جيد</th><th>ضعيف</th><th>النسبة</th><th>التقدير</th></tr></thead>
       <tbody>${rows}</tbody>
-      <tfoot><tr><td class="t">المجموع</td>${[4, 3, 2, 1].map(v => `<td>${st.total[v]}</td>`).join('')}<td>${A.fmt(st.p)}</td><td>${st.g}</td></tr></tfoot></table></div>`;
+      <tfoot><tr><td class="t">المجموع</td>${[4, 3, 2, 1].map(v => `<td>${st.total[v]}</td>`).join('')}<td>${A.fmt(st.p)}</td><td>${st.g}</td></tr></tfoot></table>${closing()}</div>`;
   }
 
   /* ---------- تقرير الدورة ---------- */
@@ -209,8 +190,7 @@
           <div class="sec"><h3>موقع كل بند على المسطرة <small>من ضعيف (25%) إلى ممتاز (100%)</small></h3>${ruler(st.sorted)}${duo(st)}</div>`)
       + sheet(run, itemsSection(st, 2))
       + (voiceSection(responses, 3, st) ? sheet(run, voiceSection(responses, 3, st)) : '')
-      + sheet(run, stepsSection(st, voiceSection(responses, 3, st) ? 4 : 3))
-      + sheet(run, appendix(st, voiceSection(responses, 3, st) ? 5 : 4));
+      + sheet(run, appendix(st, voiceSection(responses, 3, st) ? 4 : 3));
   }
 
   /* ---------- تقرير الدبلوم ---------- */
@@ -259,8 +239,7 @@
       + sheet(run, `<div class="sec">${secHead(1, 'خلاصة الدبلوم')}${hero(all, text, kps)}${pathChart(per)}</div>`)
       + sheet(run, `<div class="sec">${secHead(2, 'المدربون والبنود', 'ترتيب الدورات، ثم كل بند عند كل مدرب: كلما كان اللون أغمق كان التقييم أعلى.')}<h3>ترتيب الدورات</h3>${rank}<h3 style="margin-top:8mm">البنود عند كل مدرب</h3>${matrix}</div>`)
       + (voiceSection(allR, 3, all) ? sheet(run, voiceSection(allR, 3, all)) : '')
-      + sheet(run, stepsSection(all, 4))
-      + sheet(run, `<div class="sec">${secHead(5, 'ملحق: ملخص الدورات')}<table class="tbl"><thead><tr><th class="t">الدورة</th><th>المدرب</th><th>المقيّمون</th><th>ينصحون</th><th>النتيجة</th><th>التقدير</th></tr></thead><tbody>${appRows}</tbody></table></div>`);
+      + sheet(run, `<div class="sec">${secHead(voiceSection(allR, 3, all) ? 4 : 3, 'ملحق: ملخص الدورات')}<table class="tbl"><thead><tr><th class="t">الدورة</th><th>المدرب</th><th>المقيّمون</th><th>ينصحون</th><th>النتيجة</th><th>التقدير</th></tr></thead><tbody>${appRows}</tbody></table>${closing()}</div>`);
   }
 
   /* ---------- التشغيل ---------- */

@@ -10,7 +10,7 @@ window.ALASR_CONFIG = {
   INSTITUTE_SHORT: 'معهد العصر',
 
   // يظهر في غلاف التقرير فقط. اتركيه فارغاً لإخفائه.
-  PREPARED_BY: 'م. بهيجة شيخ ديب',
+  PREPARED_BY: 'م. بهيجه شيخ ديب',
 
   LOGO: 'assets/logo.png',           // رمز «العصر» فقط
   LOGO_FULL: 'assets/logo-full.png', // الشعار مع الاسم (لغلاف التقرير)
