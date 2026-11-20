@@ -332,7 +332,7 @@
         start(d);
       } catch (e) {
         $('login').hidden = false;
-        $('loginErr').textContent = e.message === 'unauthorized' ? 'كلمة السر غير صحيحة.' : (key ? 'تعذّر تحميل البيانات. تحققي من الاتصال.' : '');
+        $('loginErr').textContent = e.message === 'unauthorized' ? 'كلمة السر غير صحيحة.' : (key ? 'تعذّر تحميل البيانات. تأكد من اتصالك بالإنترنت ثم حاول مرة أخرى.' : '');
       }
     };
     $('loginForm').addEventListener('submit', e => { e.preventDefault(); tryKey($('key').value.trim()); });
